@@ -27,22 +27,38 @@ class Entry(db.Model):
 def index():
     return render_template('index.html')
 
-# Route for adding a new entry (expense or asset)
 @app.route('/add-entry', methods=['POST'])
 def add_entry():
-    data = request.get_json()
-    entry_type = data.get('entry_type')
-    entry_name = data.get('entry_name')
-    entry_amount = data.get('entry_amount')
+    try:
+        data = request.get_json()  # Get JSON data from the request body
+        print('Data received:', data)  # Log the received data
 
-    if entry_type and entry_name and entry_amount:
-        # Create a new Entry object and add it to the database
-        new_entry = Entry(entry_type=entry_type, entry_name=entry_name, entry_amount=entry_amount)
-        db.session.add(new_entry)
-        db.session.commit()
-        return jsonify({'message': 'Entry added successfully!'}), 201
-    else:
-        return jsonify({'error': 'Invalid data'}), 400
+        entry_type = data.get('entry_type')
+        entry_name = data.get('entry_name')
+        entry_amount = data.get('entry_amount')
+
+        # Check if the data is valid and log each field
+        if not entry_type:
+            print('Missing entry_type')
+        if not entry_name:
+            print('Missing entry_name')
+        if not entry_amount:
+            print('Missing entry_amount')
+
+        if entry_type and entry_name and entry_amount:
+            # Add the entry to the database
+            new_entry = Entry(entry_type=entry_type, entry_name=entry_name, entry_amount=entry_amount)
+            db.session.add(new_entry)
+            db.session.commit()
+            print('Entry successfully added:', new_entry)
+            return jsonify({'message': 'Entry added successfully!'}), 201
+        else:
+            print('Invalid data:', data)
+            return jsonify({'error': 'Invalid data provided'}), 400
+    except Exception as e:
+        print(f'Error occurred: {e}')  # Log the error
+        return jsonify({'error': 'Failed to add entry'}), 500
+
 
 # Route for retrieving all entries
 @app.route('/get-entries', methods=['GET'])

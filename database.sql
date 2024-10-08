@@ -6,7 +6,7 @@ CREATE TABLE entries (
     id INT AUTO_INCREMENT PRIMARY KEY,
     entry_type ENUM('expense', 'asset') NOT NULL,
     entry_name VARCHAR(255) NOT NULL,
-    entry_amount DECIMAL (10, 2) NOT NULL,
+    entry_amount DECIMAL(10, 2) NOT NULL,
     entry_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

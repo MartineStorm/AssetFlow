@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AssetFlow</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>AssetFlow - Expense and Asset Tracker</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
-
 <body>
     <header>
         <div class="logo">
@@ -15,40 +14,49 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Add Expenses</a></li>
-                <li><a href="#">Add Assets</a></li>
+                <li><a href="#">Add Expense</a></li>
+                <li><a href="#">Add Asset</a></li>
                 <li><a href="#">Reports</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <!-- Summary Section for Total Expenses and Total Assets -->
         <section class="summary">
             <div class="summary-box">
                 <h2>Total Expenses</h2>
-                <p>$0.00</p>
+                <p id="total-expenses">$0.00</p>
             </div>
             <div class="summary-box">
-                <h2>Add an Entry</h2>
-                <form id="entry-form">
-                    <label for="entry-type">Type:</label>
-                    <section id="entry-type" name="entry-type">
-                        <option value="expense">Expense</option>
-                        <option value="asset">Asset</option>
-                    </section>
-
-                    <label for="entry-name">Name:</label>
-                    <input type="text" id="entry-name" name="entry-name" placeholder="Description">
-                    
-                    <label for="entry-amount">Amount:</label>
-                    <input type="number" id="entry-amount" name="entry-amount" placeholder="$0.00" step="0.01">
-
-                    <button type="submit">Add Entry</button>
-                </form>
+                <h2>Total Assets</h2>
+                <p id="total-assets">$0.00</p>
+            </div>
         </section>
 
+        <!-- Form to add new entries (expense or asset) -->
+        <section class="tracker-form">
+            <h2>Add an Entry</h2>
+            <form id="entry-form">
+                <label for="entry-type">Type:</label>
+                <select id="entry-type" name="entry-type">
+                    <option value="expense">Expense</option>
+                    <option value="asset">Asset</option>
+                </select>
+
+                <label for="entry-name">Name:</label>
+                <input type="text" id="entry-name" name="entry-name" placeholder="Description" required>
+
+                <label for="entry-amount">Amount:</label>
+                <input type="number" id="entry-amount" name="entry-amount" placeholder="$0.00" step="0.01" required>
+
+                <button type="submit">Add Entry</button>
+            </form>
+        </section>
+
+        <!-- Table to display all entries (expenses and assets) -->
         <section class="entries">
-            <h2>Expenses & Asset History</h2>
+            <h2>Expense & Asset History</h2>
             <table>
                 <thead>
                     <tr>
@@ -59,19 +67,17 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <!-- Entries will be dynamically added here -->
                 </tbody>
             </table>
         </section>
     </main>
 
-<script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="charts.js"></script> <!-- Your custom charts.js file -->
-
-
     <footer>
         <p>&copy; 2024 AssetFlow. All rights reserved.</p>
     </footer>
+
+    <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
